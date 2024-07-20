@@ -15,17 +15,42 @@ fetch(rute)
     */
 
     let arrayData = [];
+        
+        console.time("LinkedList Insertion");
+        for (let i = 0; i < 100; i++) {
+            list.add(data[i].name);
+        }
+        console.timeEnd("LinkedList Insertion");
+
+        console.time("LinkedList bubbleSort");
+        list.bubbleSort()
+        console.timeEnd("LinkedList bubbleSort");
+
+        console.time("LinkedList mergeSort");
+        list.mergeSort()
+        console.timeEnd("LinkedList mergeSort");
+
+        console.time("LinkedList radixSort");
+        list.radixSort()
+        console.timeEnd("LinkedList radixSort");
+
         console.time("Array Insertion");
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 100; i++) {
             arrayData.push(data[i].name);
         }
         console.timeEnd("Array Insertion");
 
-        console.time("LinkedList Insertion");
-        for (let i = 0; i < 1000; i++) {
-            list.add(data[i].name);
-        }
-        console.timeEnd("LinkedList Insertion");
+        console.time("Array bubbleSort");
+        bubbleSort(arrayData)
+        console.timeEnd("Array bubbleSort");
+
+        console.time("Array mergeSort");
+        mergeSort(arrayData)
+        console.timeEnd("Array mergeSort");
+
+        console.time("Array radixSort");
+        radixSort(arrayData)
+        console.timeEnd("Array radixSort");
 
 }).catch(err => console.log(err))
 //console.timeEnd("medicion 1")
@@ -87,17 +112,6 @@ function searchArray(array, target) {
         if (array[i] === target) {
             return array[i];
         }
-    }
-    return null;
-}
-
-function searchLinkedList(linkedList, target) {
-    let current = linkedList.head;
-    while (current) {
-        if (current.value === target) {
-            return current.value;
-        }
-        current = current.next;
     }
     return null;
 }

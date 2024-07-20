@@ -22,6 +22,7 @@ class LinkedList {
     this.count = this.count + 1
   }
 
+  //Ordenamiento burbuja
   bubbleSort() {
     if (this.head == null) return;
 
@@ -43,6 +44,7 @@ class LinkedList {
     } while (swapped);
   }
 
+  //Ordenamiento merge
   mergeSort() {
     this.head = this.#mergeSortRec(this.head);
   }
@@ -137,6 +139,17 @@ class LinkedList {
       current.value = output[i];
       current = current.next;
     }
+  }
+
+  searchLinkedList(target) {
+    let current = this.head
+    while (current) {
+      if (current.value === target) {
+        return current.value
+      }
+      current = current.next;
+    }
+    return null;
   }
 }
 
