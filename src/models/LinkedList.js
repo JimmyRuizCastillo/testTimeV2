@@ -24,29 +24,29 @@ class LinkedList {
 
   //Ordenamiento burbuja
   bubbleSort() {
-    if (this.head == null) return;
+    if (this.#head == null) return
 
-    let swapped;
-    let current;
+    let swapped
+    let current
     do {
-      swapped = false;
-      current = this.head;
+      swapped = false
+      current = this.#head
 
       while (current.next != null) {
         if (current.value > current.next.value) {
-          let temp = current.value;
-          current.value = current.next.value;
-          current.next.value = temp;
-          swapped = true;
+          let temp = current.value
+          current.value = current.next.value
+          current.next.value = temp
+          swapped = true
         }
-        current = current.next;
+        current = current.next
       }
-    } while (swapped);
+    } while (swapped)
   }
 
   //Ordenamiento merge
   mergeSort() {
-    this.#head = this.#mergeSortRec(this.#head);
+    this.#head = this.#mergeSortRec(this.#head)
   }
 
   #mergeSortRec(head) {
@@ -54,102 +54,104 @@ class LinkedList {
       return head;
     }
 
-    const middle = this.#getMiddle(head);
-    const nextOfMiddle = middle.next;
+    const middle = this.#getMiddle(head)
+    const nextOfMiddle = middle.next
 
-    middle.next = null;
+    middle.next = null
 
-    const left = this.#mergeSortRec(head);
-    const right = this.#mergeSortRec(nextOfMiddle);
+    const left = this.#mergeSortRec(head)
+    const right = this.#mergeSortRec(nextOfMiddle)
 
-    return this.#sortedMerge(left, right);
+    return this.#sortedMerge(left, right)
   }
 
   #getMiddle(head) {
-    if (!head) return head;
+    if (!head) return head
 
-    let slow = head;
-    let fast = head;
+    let slow = head
+    let fast = head
 
     while (fast.next !== null && fast.next.next !== null) {
-      slow = slow.next;
-      fast = fast.next.next;
+      slow = slow.next
+      fast = fast.next.next
     }
-    return slow;
+    return slow
   }
 
   #sortedMerge(a, b) {
-    if (!a) return b;
-    if (!b) return a;
+    if (!a) return b
+    if (!b) return a
 
-    let result;
+    let result
     if (a.value <= b.value) {
-      result = a;
-      result.next = this.#sortedMerge(a.next, b);
+      result = a
+      result.next = this.#sortedMerge(a.next, b)
     } else {
-      result = b;
-      result.next = this.#sortedMerge(a, b.next);
+      result = b
+      result.next = this.#sortedMerge(a, b.next)
     }
-    return result;
+    return result
   }
 
+  //Ordenamiento Radix
   radixSort() {
-    const max = this.#getMax();
+    const max = this.#getMax()
     for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
-      this.#countSort(exp);
+      this.#countSort(exp)
     }
   }
 
   #getMax() {
     let max = this.#head.value
-    let current = this.#head.next;
+    let current = this.#head.next
 
     while (current) {
       if (current.value > max) {
-        max = current.value;
+        max = current.value
       }
-      current = current.next;
+      current = current.next
     }
-    return max;
+    return max
   }
 
   #countSort(exp) {
-    const output = new Array(this.size);
-    const count = new Array(10).fill(0);
+    const output = new Array(this.size)
+    const count = new Array(10).fill(0)
 
-    let current = this.#head;
+    let current = this.#head
     while (current) {
-      count[Math.floor(current.value / exp) % 10]++;
-      current = current.next;
+      count[Math.floor(current.value / exp) % 10]++
+      current = current.next
     }
 
     for (let i = 1; i < 10; i++) {
-      count[i] += count[i - 1];
+      count[i] += count[i - 1]
     }
 
-    current = this.#head;
+    current = this.#head
     while (current) {
-      output[count[Math.floor(current.value / exp) % 10] - 1] = current.value;
-      count[Math.floor(current.value / exp) % 10]--;
-      current = current.next;
+      output[count[Math.floor(current.value / exp) % 10] - 1] = current.value
+      count[Math.floor(current.value / exp) % 10]--
+      current = current.next
     }
 
-    current = this.#head;
+    current = this.#head
     for (let i = 0; i < this.size; i++) {
-      current.value = output[i];
-      current = current.next;
+      current.value = output[i]
+      current = current.next
     }
   }
 
+  //Buscar nodo
   searchLinkedList(target) {
     let current = this.#head
     while (current) {
       if (current.value === target) {
         return current.value
       }
-      current = current.next;
+      current = current.next
     }
-    return null;
+    return null
   }
 }
 
