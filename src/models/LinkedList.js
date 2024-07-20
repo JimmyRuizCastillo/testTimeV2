@@ -46,7 +46,7 @@ class LinkedList {
 
   //Ordenamiento merge
   mergeSort() {
-    this.head = this.#mergeSortRec(this.head);
+    this.#head = this.#mergeSortRec(this.#head);
   }
 
   #mergeSortRec(head) {
@@ -101,8 +101,8 @@ class LinkedList {
   }
 
   #getMax() {
-    let max = this.head.value;
-    let current = this.head.next;
+    let max = this.#head.value
+    let current = this.#head.next;
 
     while (current) {
       if (current.value > max) {
@@ -117,7 +117,7 @@ class LinkedList {
     const output = new Array(this.size);
     const count = new Array(10).fill(0);
 
-    let current = this.head;
+    let current = this.#head;
     while (current) {
       count[Math.floor(current.value / exp) % 10]++;
       current = current.next;
@@ -127,14 +127,14 @@ class LinkedList {
       count[i] += count[i - 1];
     }
 
-    current = this.head;
+    current = this.#head;
     while (current) {
       output[count[Math.floor(current.value / exp) % 10] - 1] = current.value;
       count[Math.floor(current.value / exp) % 10]--;
       current = current.next;
     }
 
-    current = this.head;
+    current = this.#head;
     for (let i = 0; i < this.size; i++) {
       current.value = output[i];
       current = current.next;
@@ -142,7 +142,7 @@ class LinkedList {
   }
 
   searchLinkedList(target) {
-    let current = this.head
+    let current = this.#head
     while (current) {
       if (current.value === target) {
         return current.value
